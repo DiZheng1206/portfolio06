@@ -11,3 +11,4 @@
 .project-bar{height:22px}.project-bar h2,.project-bar strong,.project-bar b{font-size:12px;line-height:1}.project-bar span{font-size:18px}@media(max-width:760px){.project-bar{min-height:22px}.project-bar h2,.project-bar strong,.project-bar b{font-size:11px}}
 .hero h1{font-size:clamp(5.5rem,10vw,12rem);text-transform:none}@media(max-width:760px){.hero h1{font-size:15vw}}
 .ascii-logo pre{animation:none!important;transform:none}
+.ascii-logo{width:min(112vw,1400px)}.ascii-logo pre{font-size:clamp(9px,1.05vw,16px)}@media(max-width:760px){.ascii-logo{width:118vw}.ascii-logo pre{font-size:2.2vw}}
