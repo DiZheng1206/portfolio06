@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { Bodoni_Moda } from "next/font/google";
 import "./globals.css";
+const displayFont=Bodoni_Moda({subsets:["latin"],variable:"--font-display"});
 export const metadata: Metadata = {
-  metadataBase: new URL("https://di-creative-portfolio.agile-bow-9238.chatgpt.site"),
-  title:"你的名字 — 作品集",
-  description:"个人设计、影像与创意作品集。",
-  openGraph:{title:"你的名字 — 作品集",description:"个人设计、影像与创意作品集。",type:"website",images:["/og.png"]},
-  twitter:{card:"summary_large_image",title:"你的名字 — 作品集",description:"个人设计、影像与创意作品集。",images:["/og.png"]}
+  metadataBase: new URL("https://di-creative-portfolio.deane1206.chatgpt.site"),
+  title:"DI ZHENG — Portfolio 2026",
+  description:"DI Zheng design portfolio 2026.",
+  openGraph:{title:"DI ZHENG — Portfolio 2026",description:"DI Zheng design portfolio 2026.",type:"website",images:["/og.png"]},
+  twitter:{card:"summary_large_image",title:"DI ZHENG — Portfolio 2026",description:"DI Zheng design portfolio 2026.",images:["/og.png"]}
 };
-export default function RootLayout({children}:Readonly<{children:React.ReactNode}>){return <html lang="zh-CN"><body>{children}</body></html>}
+export default function RootLayout({children}:Readonly<{children:React.ReactNode}>){return <html lang="zh-CN"><body className={displayFont.variable}>{children}</body></html>}

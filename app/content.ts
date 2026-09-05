@@ -1,4 +1,4 @@
-export const profile = { name: "你的名字", role: "独立设计师与创意工作者", location: "现居中国，接受新的合作机会。", email: "hello@example.com", instagram: "https://instagram.com/" };
+export const profile = { name: "DI ZHENG", role: "Independent designer and creative", location: "Portfolio 2026", email: "hello@example.com", instagram: "https://instagram.com/" };
 
 export const projects = [
   { id:"01", title:"物外", services:"品牌设计，艺术指导", year:"2026", description:"为一个关注日常器物与自然材料的品牌建立视觉身份。克制的版式与温暖的影像共同构成一套安静、清晰且可持续生长的设计语言。", client:"个人项目", link:"https://example.com", images:["https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1800&q=88","https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1800&q=88","https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1800&q=88"] },
