@@ -69,7 +69,7 @@ export default function Home(){
           <div className="project-bar"><h2>{project.title}</h2><strong>{project.services}</strong><b>{project.year}</b><span>×</span></div>
           <div className="project-copy"><p>{project.description}</p><dl><dt>client:</dt><dd>{project.client}</dd><dt>website:</dt><dd><a href={project.link} target="_blank" rel="noreferrer">visit project ↗</a></dd><dt>photos:</dt><dd>your name</dd></dl></div>
           <div className={`project-gallery pattern-${pIndex%3}`}>
-            {[...project.images,...project.images].map((src,i)=><figure key={`${src}-${i}`}><img src={src} alt={`${project.title} project ${i+1}`} loading="lazy"/><figcaption>{project.id.toLowerCase()}_{String(i+1).padStart(3,"0")}.jpg</figcaption></figure>)}
+            {(project.images.length>=6?project.images:[...project.images,...project.images]).map((src,i)=><figure key={`${src}-${i}`}><img src={src} alt={`${project.title} project ${i+1}`} loading="lazy"/><figcaption>{project.id.toLowerCase()}_{String(i+1).padStart(3,"0")}.jpg</figcaption></figure>)}
           </div>
         </article>)}
       </section>
