@@ -23,8 +23,8 @@ function AsciiLogo(){
         for(let x=0;x<cols;x++){
           const i=(y*cols+x)*4;
           const light=(pixels[i]+pixels[i+1]+pixels[i+2])/3;
-          if(light<42){output+=" ";continue}
-          const index=Math.min(glyphs.length-1,Math.floor((255-light)/255*glyphs.length));
+          if(light>230){output+=" ";continue}
+          const index=Math.min(glyphs.length-1,Math.floor(light/230*glyphs.length));
           output+=glyphs[index];
         }
         output+="\n";
