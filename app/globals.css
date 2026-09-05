@@ -12,3 +12,4 @@
 .hero h1{font-size:clamp(5.5rem,10vw,12rem);text-transform:none}@media(max-width:760px){.hero h1{font-size:15vw}}
 .ascii-logo pre{animation:none!important;transform:none}
 .ascii-logo{width:min(112vw,1400px)}.ascii-logo pre{font-size:clamp(9px,1.05vw,16px)}@media(max-width:760px){.ascii-logo{width:118vw}.ascii-logo pre{font-size:2.2vw}}
+.hero h1 span:first-child,.hero h1 span:nth-child(2){left:auto;right:12px;font-family:"PF Videotext","Courier New",monospace;font-size:70%;letter-spacing:-.055em;text-align:right}.hero h1 span:first-child{top:34%}.hero h1 span:nth-child(2){top:49%}@media(max-width:760px){.hero h1 span:first-child,.hero h1 span:nth-child(2){left:auto;right:8px;font-size:70%}.hero h1 span:first-child{top:40%}.hero h1 span:nth-child(2){top:51%}}
