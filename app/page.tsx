@@ -1,13 +1,44 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { profile, projects } from "./content";
 
 const ascii = `                .-=====-.\n             .-'  .---.  '-.\n           .'    /  _  \\    '.\n          /     |  (_)  |     \\\n         |       \\     /       |\n          \\       '---'       /\n           '._    .---.    _.'\n              '--/     \\--'\n          ____.-'       '-.____\n       .-'   /             \\   '-.\n      /_____/               \\_____\\`;
 
+function AsciiLogo(){
+  const [art,setArt]=useState("");
+  useEffect(()=>{
+    const image=new Image();
+    image.src="/logo-source.png";
+    image.onload=()=>{
+      const cols=74,rows=74;
+      const canvas=document.createElement("canvas");
+      canvas.width=cols;canvas.height=rows;
+      const context=canvas.getContext("2d",{willReadFrequently:true});
+      if(!context)return;
+      context.drawImage(image,0,0,cols,rows);
+      const pixels=context.getImageData(0,0,cols,rows).data;
+      const glyphs="@%#*+=-:.";
+      let output="";
+      for(let y=0;y<rows;y++){
+        for(let x=0;x<cols;x++){
+          const i=(y*cols+x)*4;
+          const light=(pixels[i]+pixels[i+1]+pixels[i+2])/3;
+          if(light<42){output+=" ";continue}
+          const index=Math.min(glyphs.length-1,Math.floor((255-light)/255*glyphs.length));
+          output+=glyphs[index];
+        }
+        output+="\n";
+      }
+      setArt(output);
+    };
+  },[]);
+  return <div className="ascii-logo" aria-hidden="true"><pre>{art}</pre></div>
+}
+
 export default function Home(){
   const [view,setView]=useState<"projects"|"photos"|"about">("projects");
   const go=(next:typeof view)=>{setView(next);window.scrollTo({top:0,behavior:"smooth"})};
-  return <main>
+  return <main><AsciiLogo/>
     <header className="site-header">
       <button className="wordmark" onClick={()=>go("projects")}><i/>{profile.name}</button><span/>
       <button className={view==="photos"?"active":""} onClick={()=>go("photos")}>photos</button>
@@ -15,7 +46,7 @@ export default function Home(){
     </header>
 
     {view==="projects"&&<>
-      <section className="hero"><pre className="ascii" aria-hidden="true">{ascii}</pre><h1>swiss based web and<br/>brand designer. currently open<br/>for a new position.</h1><a className="scroll-cue" href="#projects"><span>scroll down</span><b>↓</b></a></section>
+      <section className="hero"><h1>swiss based web and<br/>brand designer. currently open<br/>for a new position.</h1><a className="scroll-cue" href="#projects"><span>scroll down</span><b>↓</b></a></section>
       <section id="projects" className="project-list"><p className="section-label">projects</p>
         {projects.map((project,pIndex)=><article className="project" key={project.id}>
           <div className="project-bar"><h2>{project.title}</h2><strong>{project.services}</strong><b>{project.year}</b><span>×</span></div>
@@ -27,9 +58,9 @@ export default function Home(){
       </section>
     </>}
 
-    {view==="photos"&&<section className="archive"><div className="archive-intro"><pre>{ascii}</pre><h1>photo archive</h1><p>fragments, observations<br/>and work in progress.</p></div><div className="archive-grid">{projects.flatMap(p=>[...p.images,...p.images]).map((src,i)=><figure key={`${src}-${i}`}><img src={src} alt={`archive ${i+1}`} loading="lazy"/><figcaption>ph_{String(i+1).padStart(3,"0")}.jpg</figcaption></figure>)}</div></section>}
+    {view==="photos"&&<section className="archive"><div className="archive-intro"><h1>photo archive</h1><p>fragments, observations<br/>and work in progress.</p></div><div className="archive-grid">{projects.flatMap(p=>[...p.images,...p.images]).map((src,i)=><figure key={`${src}-${i}`}><img src={src} alt={`archive ${i+1}`} loading="lazy"/><figcaption>ph_{String(i+1).padStart(3,"0")}.jpg</figcaption></figure>)}</div></section>}
 
-    {view==="about"&&<section className="about-screen"><pre>{ascii}</pre><div><p>about</p><h1>i build identities,<br/>images and digital<br/>experiences.</h1></div><aside><p>这是你的个人介绍区域。可以在 content.ts 中修改姓名、项目、联系方式与全部图片。</p><a href={`mailto:${profile.email}`}>{profile.email}</a><a href={profile.instagram}>instagram ↗</a></aside></section>}
+    {view==="about"&&<section className="about-screen"><div><p>about</p><h1>i build identities,<br/>images and digital<br/>experiences.</h1></div><aside><p>这是你的个人介绍区域。可以在 content.ts 中修改姓名、项目、联系方式与全部图片。</p><a href={`mailto:${profile.email}`}>{profile.email}</a><a href={profile.instagram}>instagram ↗</a></aside></section>}
     <footer><button onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}>↑ top</button><span>design & development by {profile.name}</span><span>©{new Date().getFullYear()}</span></footer>
   </main>
 }
