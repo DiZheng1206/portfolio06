@@ -46,7 +46,7 @@ export default function Home(){
     </header>
 
     {view==="projects"&&<>
-      <section className="hero"><h1><span>DI ZHENG</span><span>portfolio</span><span>2026</span></h1><a className="scroll-cue" href="#projects"><span>scroll down</span><b>↓</b></a></section>
+      <section className="hero"><h1><span>di zheng</span><span>portfolio</span><span>2026</span></h1><a className="scroll-cue" href="#projects"><span>scroll down</span><b>↓</b></a></section>
       <section id="projects" className="project-list"><p className="section-label">work</p>
         {projects.map((project,pIndex)=><article className="project" key={project.id}>
           <div className="project-bar"><h2>{project.title}</h2><strong>{project.services}</strong><b>{project.year}</b><span>×</span></div>
