@@ -1,13 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { profile, projects } from "./content";
 
 const ascii = `                .-=====-.\n             .-'  .---.  '-.\n           .'    /  _  \\    '.\n          /     |  (_)  |     \\\n         |       \\     /       |\n          \\       '---'       /\n           '._    .---.    _.'\n              '--/     \\--'\n          ____.-'       '-.____\n       .-'   /             \\   '-.\n      /_____/               \\_____\\`;
 
 function AsciiLogo(){
-  const [art,setArt]=useState("");
+  const artRef=useRef<HTMLPreElement>(null);
   useEffect(()=>{
     const image=new Image();
+    let frame=0;
     image.src="/logo-source.png";
     image.onload=()=>{
       const cols=74,rows=74;
@@ -15,24 +16,40 @@ function AsciiLogo(){
       canvas.width=cols;canvas.height=rows;
       const context=canvas.getContext("2d",{willReadFrequently:true});
       if(!context)return;
-      context.drawImage(image,0,0,cols,rows);
-      const pixels=context.getImageData(0,0,cols,rows).data;
       const glyphs="@%#*+=-:.";
-      let output="";
-      for(let y=0;y<rows;y++){
-        for(let x=0;x<cols;x++){
-          const i=(y*cols+x)*4;
-          const light=(pixels[i]+pixels[i+1]+pixels[i+2])/3;
-          if(light>230){output+=" ";continue}
-          const index=Math.min(glyphs.length-1,Math.floor(light/230*glyphs.length));
-          output+=glyphs[index];
+      let lastPaint=0;
+      const render=(time:number)=>{
+        if(time-lastPaint>50){
+          lastPaint=time;
+          const angle=(time%32000)/32000*Math.PI*2;
+          context.clearRect(0,0,cols,rows);
+          context.fillStyle="#fff";
+          context.fillRect(0,0,cols,rows);
+          context.save();
+          context.translate(cols/2,rows/2);
+          context.scale(Math.cos(angle),1);
+          context.drawImage(image,-cols/2,-rows/2,cols,rows);
+          context.restore();
+          const pixels=context.getImageData(0,0,cols,rows).data;
+          let output="";
+          for(let y=0;y<rows;y++){
+            for(let x=0;x<cols;x++){
+              const i=(y*cols+x)*4;
+              const light=(pixels[i]+pixels[i+1]+pixels[i+2])/3;
+              if(light>230){output+=" ";continue}
+              output+=glyphs[Math.min(glyphs.length-1,Math.floor(light/230*glyphs.length))];
+            }
+            output+="\n";
+          }
+          if(artRef.current)artRef.current.textContent=output;
         }
-        output+="\n";
-      }
-      setArt(output);
+        frame=requestAnimationFrame(render);
+      };
+      frame=requestAnimationFrame(render);
     };
+    return ()=>cancelAnimationFrame(frame);
   },[]);
-  return <div className="ascii-logo" aria-hidden="true"><pre>{art}</pre></div>
+  return <div className="ascii-logo" aria-hidden="true"><pre ref={artRef}/></div>
 }
 
 export default function Home(){
