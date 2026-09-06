@@ -152,13 +152,13 @@ body{
   min-height:115svh;
 }
 .hero h1 span:first-child{
-  top:52%;
+  top:45%;
 }
 .hero h1 span:nth-child(2){
-  top:67%;
+  top:60%;
 }
 .hero h1 span:nth-child(3){
-  top:82%;
+  top:75%;
 }
 .project-list{
   padding-top:6vh;
@@ -179,13 +179,13 @@ body{
     min-height:106svh;
   }
   .hero h1 span:first-child{
-    top:50%;
+    top:44%;
   }
   .hero h1 span:nth-child(2){
-    top:64%;
+    top:58%;
   }
   .hero h1 span:nth-child(3){
-    top:78%;
+    top:72%;
   }
   .project-list{
     padding-top:4vh;
