@@ -12,12 +12,12 @@ function AsciiLogo(){
     let frame=0;
     image.src="/logo-source.png";
     image.onload=()=>{
-      const cols=74,rows=74;
+      const cols=108,rows=108;
       const canvas=document.createElement("canvas");
       canvas.width=cols;canvas.height=rows;
       const context=canvas.getContext("2d",{willReadFrequently:true});
       if(!context)return;
-      const glyphs="@%#*+=-:.";
+          const glyphs="@%#8&$0O*+=-:,.";
       let lastPaint=0;
       const render=(time:number)=>{
         if(time-lastPaint>50){

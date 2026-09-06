@@ -78,5 +78,17 @@
 }
 
 .ascii-logo{
-  top:40%;
+  top:35%;
+}
+.ascii-logo pre{
+  font-size:clamp(8px,.95vw,15px);
+  line-height:.68;
+  letter-spacing:-.04em;
+  text-shadow:1px 0 rgba(0,0,0,.08),2px 0 rgba(0,0,0,.035);
+}
+@media(max-width:760px){
+  .ascii-logo pre{
+    font-size:1.85vw;
+    line-height:.7;
+  }
 }
