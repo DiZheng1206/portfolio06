@@ -166,8 +166,8 @@ body{
 .project-bar{
   color:#050505;
   background:transparent;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
+  border-top:0;
+  border-bottom:0;
   transition:background-color .28s ease,color .28s ease;
 }
 .project-bar:hover{
