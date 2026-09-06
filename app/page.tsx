@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import type { CSSProperties } from "react";
+import { flushSync } from "react-dom";
 import { profile, projects } from "./content";
 
 const ascii = `                .-=====-.\n             .-'  .---.  '-.\n           .'    /  _  \\    '.\n          /     |  (_)  |     \\\n         |       \\     /       |\n          \\       '---'       /\n           '._    .---.    _.'\n              '--/     \\--'\n          ____.-'       '-.____\n       .-'   /             \\   '-.\n      /_____/               \\_____\\`;
@@ -57,9 +57,25 @@ export default function Home(){
   const [view,setView]=useState<"projects"|"photos"|"about">("projects");
   const [expandedImages,setExpandedImages]=useState<Set<string>>(()=>new Set());
   const toggleImage=(key:string)=>{
-    const update=()=>setExpandedImages(current=>{const next=new Set(current);next.has(key)?next.delete(key):next.add(key);return next});
-    const page=document as Document&{startViewTransition?:(callback:()=>void)=>void};
-    page.startViewTransition?page.startViewTransition(update):update();
+    const figures=Array.from(document.querySelectorAll<HTMLElement>(".project-gallery figure,.archive-grid figure"));
+    const before=new Map(figures.map(figure=>[figure,figure.getBoundingClientRect()]));
+    flushSync(()=>setExpandedImages(current=>{const next=new Set(current);next.has(key)?next.delete(key):next.add(key);return next}));
+    if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+    figures.forEach(figure=>{
+      const first=before.get(figure);
+      const last=figure.getBoundingClientRect();
+      if(!first||!last.width||!last.height)return;
+      const dx=first.left-last.left;
+      const dy=first.top-last.top;
+      const sx=first.width/last.width;
+      const sy=first.height/last.height;
+      if(Math.abs(dx)<.5&&Math.abs(dy)<.5&&Math.abs(sx-1)<.005&&Math.abs(sy-1)<.005)return;
+      figure.getAnimations().forEach(animation=>animation.cancel());
+      figure.animate([
+        {transformOrigin:"top left",transform:`translate(${dx}px,${dy}px) scale(${sx},${sy})`},
+        {transformOrigin:"top left",transform:"translate(0,0) scale(1,1)"}
+      ],{duration:900,easing:"cubic-bezier(.22,.8,.22,1)"});
+    });
   };
   const go=(next:typeof view)=>{setExpandedImages(new Set());setView(next);window.scrollTo({top:0,behavior:"smooth"})};
   return <main><AsciiLogo/>
@@ -76,13 +92,13 @@ export default function Home(){
           <div className="project-bar"><h2>{project.title}</h2><strong>{project.services}</strong><b>{project.year}</b><span>×</span></div>
           <div className="project-copy"><p>{project.description}</p><dl><dt>client:</dt><dd>{project.client}</dd><dt>website:</dt><dd><a href={project.link} target="_blank" rel="noreferrer">visit project ↗</a></dd><dt>photos:</dt><dd>your name</dd></dl></div>
           <div className={`project-gallery pattern-${pIndex%3}`}>
-            {(project.images.length>=6?project.images:[...project.images,...project.images]).map((src,i)=>{const imageKey=`project-${project.id}-${i}`;const expanded=expandedImages.has(imageKey);return <figure key={`${src}-${i}`} className={expanded?"is-expanded":""} style={{viewTransitionName:imageKey} as CSSProperties} role="button" tabIndex={0} aria-pressed={expanded} onClick={()=>toggleImage(imageKey)} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleImage(imageKey)}}}><img src={src} alt={`${project.title} project ${i+1}`} loading="lazy"/><figcaption>{project.id.toLowerCase()}_{String(i+1).padStart(3,"0")}.jpg</figcaption></figure>})}
+            {(project.images.length>=6?project.images:[...project.images,...project.images]).map((src,i)=>{const imageKey=`project-${project.id}-${i}`;const expanded=expandedImages.has(imageKey);return <figure key={`${src}-${i}`} className={expanded?"is-expanded":""} role="button" tabIndex={0} aria-pressed={expanded} onClick={()=>toggleImage(imageKey)} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleImage(imageKey)}}}><img src={src} alt={`${project.title} project ${i+1}`} loading="lazy"/><figcaption>{project.id.toLowerCase()}_{String(i+1).padStart(3,"0")}.jpg</figcaption></figure>})}
           </div>
         </article>)}
       </section>
     </>}
 
-    {view==="photos"&&<section className="archive"><div className="archive-intro"><h1>work archive</h1><p>selected projects,<br/>details and experiments.</p></div><div className="archive-grid">{projects.flatMap(p=>[...p.images,...p.images]).map((src,i)=>{const imageKey=`archive-${i}`;const expanded=expandedImages.has(imageKey);return <figure key={`${src}-${i}`} className={expanded?"is-expanded":""} style={{viewTransitionName:imageKey} as CSSProperties} role="button" tabIndex={0} aria-pressed={expanded} onClick={()=>toggleImage(imageKey)} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleImage(imageKey)}}}><img src={src} alt={`archive ${i+1}`} loading="lazy"/><figcaption>work_{String(i+1).padStart(3,"0")}.jpg</figcaption></figure>})}</div></section>}
+    {view==="photos"&&<section className="archive"><div className="archive-intro"><h1>work archive</h1><p>selected projects,<br/>details and experiments.</p></div><div className="archive-grid">{projects.flatMap(p=>[...p.images,...p.images]).map((src,i)=>{const imageKey=`archive-${i}`;const expanded=expandedImages.has(imageKey);return <figure key={`${src}-${i}`} className={expanded?"is-expanded":""} role="button" tabIndex={0} aria-pressed={expanded} onClick={()=>toggleImage(imageKey)} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleImage(imageKey)}}}><img src={src} alt={`archive ${i+1}`} loading="lazy"/><figcaption>work_{String(i+1).padStart(3,"0")}.jpg</figcaption></figure>})}</div></section>}
 
     {view==="about"&&<section className="about-screen"><div><p>about</p><h1>i build identities,<br/>images and digital<br/>experiences.</h1></div><aside><p>这是你的个人介绍区域。可以在 content.ts 中修改姓名、项目、联系方式与全部图片。</p><a href={`mailto:${profile.email}`}>{profile.email}</a><a href={profile.instagram}>instagram ↗</a></aside></section>}
     <footer><button onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}>↑ top</button><span>design & development by {profile.name}</span><span>©{new Date().getFullYear()}</span></footer>
