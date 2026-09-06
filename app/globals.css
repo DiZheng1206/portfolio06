@@ -92,3 +92,24 @@
     line-height:.7;
   }
 }
+
+.hero h1 span.hero-year{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:.14em;
+}
+.hero-year .hero-silver-logo{
+  position:static;
+  width:auto;
+  height:.78em;
+  transform:none;
+  object-fit:contain;
+  mix-blend-mode:normal;
+  flex:0 0 auto;
+}
+.hero-year em{
+  font:inherit;
+  font-style:normal;
+  line-height:1;
+}
