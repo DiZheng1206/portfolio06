@@ -61,3 +61,18 @@
     padding-right:0!important;
   }
 }
+
+/* Align the four gallery tracks with the page's 25/50/75% vertical rules. */
+@media(min-width:761px){
+  .project-gallery,
+  .archive-grid{
+    grid-template-columns:calc(25% - 6px) calc(25% + 6px) calc(25% + 6px) calc(25% - 6px);
+  }
+  .project-gallery figure:nth-child(n),
+  .archive-grid figure:nth-child(n),
+  .project-gallery figure.is-expanded:nth-child(n),
+  .archive-grid figure.is-expanded:nth-child(n){
+    padding-left:6px!important;
+    padding-right:6px!important;
+  }
+}
