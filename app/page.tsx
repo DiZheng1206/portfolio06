@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import type { CSSProperties } from "react";
 import { profile, projects } from "./content";
 
 const ascii = `                .-=====-.\n             .-'  .---.  '-.\n           .'    /  _  \\    '.\n          /     |  (_)  |     \\\n         |       \\     /       |\n          \\       '---'       /\n           '._    .---.    _.'\n              '--/     \\--'\n          ____.-'       '-.____\n       .-'   /             \\   '-.\n      /_____/               \\_____\\`;
@@ -54,9 +55,13 @@ function AsciiLogo(){
 
 export default function Home(){
   const [view,setView]=useState<"projects"|"photos"|"about">("projects");
-  const [expandedImage,setExpandedImage]=useState<string|null>(null);
-  const toggleImage=(key:string)=>setExpandedImage(current=>current===key?null:key);
-  const go=(next:typeof view)=>{setExpandedImage(null);setView(next);window.scrollTo({top:0,behavior:"smooth"})};
+  const [expandedImages,setExpandedImages]=useState<Set<string>>(()=>new Set());
+  const toggleImage=(key:string)=>{
+    const update=()=>setExpandedImages(current=>{const next=new Set(current);next.has(key)?next.delete(key):next.add(key);return next});
+    const page=document as Document&{startViewTransition?:(callback:()=>void)=>void};
+    page.startViewTransition?page.startViewTransition(update):update();
+  };
+  const go=(next:typeof view)=>{setExpandedImages(new Set());setView(next);window.scrollTo({top:0,behavior:"smooth"})};
   return <main><AsciiLogo/>
     <header className="site-header">
       <button className="wordmark" onClick={()=>go("projects")}><i/>{profile.name}</button><span/>
@@ -71,13 +76,13 @@ export default function Home(){
           <div className="project-bar"><h2>{project.title}</h2><strong>{project.services}</strong><b>{project.year}</b><span>×</span></div>
           <div className="project-copy"><p>{project.description}</p><dl><dt>client:</dt><dd>{project.client}</dd><dt>website:</dt><dd><a href={project.link} target="_blank" rel="noreferrer">visit project ↗</a></dd><dt>photos:</dt><dd>your name</dd></dl></div>
           <div className={`project-gallery pattern-${pIndex%3}`}>
-            {(project.images.length>=6?project.images:[...project.images,...project.images]).map((src,i)=>{const imageKey=`project-${project.id}-${i}`;return <figure key={`${src}-${i}`} className={expandedImage===imageKey?"is-expanded":""} role="button" tabIndex={0} aria-pressed={expandedImage===imageKey} onClick={()=>toggleImage(imageKey)} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleImage(imageKey)}}}><img src={src} alt={`${project.title} project ${i+1}`} loading="lazy"/><figcaption>{project.id.toLowerCase()}_{String(i+1).padStart(3,"0")}.jpg</figcaption></figure>})}
+            {(project.images.length>=6?project.images:[...project.images,...project.images]).map((src,i)=>{const imageKey=`project-${project.id}-${i}`;const expanded=expandedImages.has(imageKey);return <figure key={`${src}-${i}`} className={expanded?"is-expanded":""} style={{viewTransitionName:imageKey} as CSSProperties} role="button" tabIndex={0} aria-pressed={expanded} onClick={()=>toggleImage(imageKey)} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleImage(imageKey)}}}><img src={src} alt={`${project.title} project ${i+1}`} loading="lazy"/><figcaption>{project.id.toLowerCase()}_{String(i+1).padStart(3,"0")}.jpg</figcaption></figure>})}
           </div>
         </article>)}
       </section>
     </>}
 
-    {view==="photos"&&<section className="archive"><div className="archive-intro"><h1>work archive</h1><p>selected projects,<br/>details and experiments.</p></div><div className="archive-grid">{projects.flatMap(p=>[...p.images,...p.images]).map((src,i)=>{const imageKey=`archive-${i}`;return <figure key={`${src}-${i}`} className={expandedImage===imageKey?"is-expanded":""} role="button" tabIndex={0} aria-pressed={expandedImage===imageKey} onClick={()=>toggleImage(imageKey)} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleImage(imageKey)}}}><img src={src} alt={`archive ${i+1}`} loading="lazy"/><figcaption>work_{String(i+1).padStart(3,"0")}.jpg</figcaption></figure>})}</div></section>}
+    {view==="photos"&&<section className="archive"><div className="archive-intro"><h1>work archive</h1><p>selected projects,<br/>details and experiments.</p></div><div className="archive-grid">{projects.flatMap(p=>[...p.images,...p.images]).map((src,i)=>{const imageKey=`archive-${i}`;const expanded=expandedImages.has(imageKey);return <figure key={`${src}-${i}`} className={expanded?"is-expanded":""} style={{viewTransitionName:imageKey} as CSSProperties} role="button" tabIndex={0} aria-pressed={expanded} onClick={()=>toggleImage(imageKey)} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleImage(imageKey)}}}><img src={src} alt={`archive ${i+1}`} loading="lazy"/><figcaption>work_{String(i+1).padStart(3,"0")}.jpg</figcaption></figure>})}</div></section>}
 
     {view==="about"&&<section className="about-screen"><div><p>about</p><h1>i build identities,<br/>images and digital<br/>experiences.</h1></div><aside><p>这是你的个人介绍区域。可以在 content.ts 中修改姓名、项目、联系方式与全部图片。</p><a href={`mailto:${profile.email}`}>{profile.email}</a><a href={profile.instagram}>instagram ↗</a></aside></section>}
     <footer><button onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}>↑ top</button><span>design & development by {profile.name}</span><span>©{new Date().getFullYear()}</span></footer>
