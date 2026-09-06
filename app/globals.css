@@ -147,6 +147,51 @@ body{
   outline-color:#000;
 }
 
+/* Give the hero title and project list a more spacious editorial rhythm. */
+.hero{
+  min-height:115svh;
+}
+.hero h1 span:first-child{
+  top:52%;
+}
+.hero h1 span:nth-child(2){
+  top:67%;
+}
+.hero h1 span:nth-child(3){
+  top:82%;
+}
+.project-list{
+  padding-top:6vh;
+}
+.project-bar{
+  color:#050505;
+  background:transparent;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  transition:background-color .28s ease,color .28s ease;
+}
+.project-bar:hover{
+  color:#fff;
+  background:#000;
+}
+@media(max-width:760px){
+  .hero{
+    min-height:106svh;
+  }
+  .hero h1 span:first-child{
+    top:50%;
+  }
+  .hero h1 span:nth-child(2){
+    top:64%;
+  }
+  .hero h1 span:nth-child(3){
+    top:78%;
+  }
+  .project-list{
+    padding-top:4vh;
+  }
+}
+
 .hero{
   border-bottom:0;
 }
