@@ -121,7 +121,7 @@
 body{
   color:#050505;
   background-color:#fff;
-  background-image:linear-gradient(rgba(0,0,0,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.025) 1px,transparent 1px);
+  background-image:linear-gradient(rgba(0,0,0,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.012) 1px,transparent 1px);
 }
 .site-header{
   background:rgba(255,255,255,.86);
