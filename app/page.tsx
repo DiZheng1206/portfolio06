@@ -59,7 +59,7 @@ export default function Home(){
     <header className="site-header">
       <button className="wordmark" onClick={()=>go("projects")}><i/>{profile.name}</button><span/>
       <button className={view==="photos"?"active":""} onClick={()=>go("photos")}>work</button>
-      <button className={view==="about"?"active":""} onClick={()=>go("about")}>about</button>
+      <a className="header-email" href="mailto:dideane@163.com">dideane@163.com</a>
     </header>
 
     {view==="projects"&&<>
