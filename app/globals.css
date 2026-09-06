@@ -114,6 +114,22 @@
   line-height:1;
 }
 
+.hero{
+  border-bottom:0;
+}
+.project-list{
+  position:relative;
+  isolation:isolate;
+}
+.project-list:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent calc(25% - .5px),var(--line) 25%,transparent calc(25% + .5px),transparent calc(50% - .5px),var(--line) 50%,transparent calc(50% + .5px),transparent calc(75% - .5px),var(--line) 75%,transparent calc(75% + .5px));
+}
+
 /* Dark portfolio theme */
 :root{
   --line:rgba(255,255,255,.22);
@@ -121,7 +137,7 @@
 body{
   color:#f5f5f2;
   background-color:#050505;
-  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-image:none;
 }
 .site-header{
   background:rgba(5,5,5,.86);
