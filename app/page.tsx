@@ -74,7 +74,7 @@ export default function Home(){
       figure.animate([
         {transformOrigin:"top left",transform:`translate(${dx}px,${dy}px) scale(${sx},${sy})`},
         {transformOrigin:"top left",transform:"translate(0,0) scale(1,1)"}
-      ],{duration:900,easing:"cubic-bezier(.22,.8,.22,1)"});
+      ],{duration:700,easing:"cubic-bezier(.16,1,.3,1)"});
     });
   };
   const go=(next:typeof view)=>{setExpandedImages(new Set());setView(next);window.scrollTo({top:0,behavior:"smooth"})};

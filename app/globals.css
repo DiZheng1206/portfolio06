@@ -37,3 +37,27 @@
   filter:saturate(.92);
   transition:none;
 }
+
+/* Keep every row aligned and preserve each image's top-left anchor while resizing. */
+.project-gallery figure:nth-child(n),
+.archive-grid figure:nth-child(n){
+  margin-top:0!important;
+}
+.project-gallery figure.is-expanded,
+.archive-grid figure.is-expanded{
+  padding-left:6px!important;
+  padding-right:6px!important;
+}
+.project-gallery figure.is-expanded:nth-child(6n+1){
+  padding-left:0!important;
+}
+.project-gallery figure.is-expanded:nth-child(6n+4){
+  padding-right:0!important;
+}
+@media(max-width:760px){
+  .project-gallery figure.is-expanded,
+  .archive-grid figure.is-expanded{
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+}
