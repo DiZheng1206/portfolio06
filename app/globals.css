@@ -1,4 +1,16 @@
 @import 'tailwindcss';
+@import url("https://fontsapi.zeoseven.com/159/main/result.css");
+html,
+body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+}
+main{
+  width:100%;
+  max-width:100%;
+  overflow-x:clip;
+}
 :root{--line:rgba(0,0,0,.24)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#050505;background-color:#fff;background-image:linear-gradient(rgba(0,0,0,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.025) 1px,transparent 1px);background-size:8px 8px;font-family:"Courier New","PingFang SC",monospace}button,a{color:inherit}button{font:inherit}.site-header{position:fixed;z-index:20;inset:0 0 auto;height:64px;display:grid;grid-template-columns:repeat(4,1fr);align-items:center;padding:0 12px;background:rgba(255,255,255,.86);backdrop-filter:blur(3px)}.site-header:after,.hero:after,.project:after,.archive:after,.about-screen:after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,transparent calc(25% - .5px),var(--line) 25%,transparent calc(25% + .5px),transparent calc(50% - .5px),var(--line) 50%,transparent calc(50% + .5px),transparent calc(75% - .5px),var(--line) 75%,transparent calc(75% + .5px))}.site-header button{justify-self:start;border:0;background:none;padding:0;font-weight:700;font-size:16px;cursor:pointer}.site-header button.active{text-decoration:underline;text-underline-offset:4px}.wordmark i{display:inline-block;width:13px;height:13px;background:#000;vertical-align:-1px;margin-right:8px}.hero{position:relative;z-index:1;overflow:hidden;min-height:100svh;padding:64px 12px 18px;display:flex;flex-direction:column;justify-content:flex-end;border-bottom:1px solid var(--line)}.hero h1{position:relative;z-index:2;margin:0;max-width:none;font-family:Arial,"PingFang SC",sans-serif;font-size:clamp(4.4rem,8.7vw,10.8rem);line-height:.88;letter-spacing:-.065em;font-weight:400}.ascii{position:absolute;z-index:1;inset:8vh 17% auto;margin:0;color:rgba(0,0,0,.27);font:clamp(9px,1vw,16px)/.82 monospace;text-align:center;transform:scale(2.8,2.4);transform-origin:center top;white-space:pre}.scroll-cue{position:absolute;z-index:3;right:12px;top:45%;display:flex;width:110px;justify-content:space-between;padding-top:5px;border-top:1px solid;text-decoration:none;font-size:11px}.section-label{height:44px;margin:0;padding:25px 12px 0;font:14px Arial,sans-serif}.project{position:relative;z-index:1}.project-bar{height:25px;display:grid;grid-template-columns:2fr 1fr 1fr 18px;align-items:center;background:#000;color:#fff;padding:0 12px;column-gap:8px}.project-bar h2,.project-bar strong,.project-bar b{margin:0;font-size:15px;line-height:1;font-weight:700}.project-bar span{font:24px/1 Arial,sans-serif}.project-copy{display:grid;grid-template-columns:2fr 1fr 1fr;min-height:118px;padding:14px 12px}.project-copy>p{grid-column:1/2;margin:0;padding-right:10%;font-family:Arial,"PingFang SC",sans-serif;font-size:15px;line-height:1.25}.project-copy dl{grid-column:3/4;display:grid;grid-template-columns:90px 1fr;align-content:start;margin:0;font-family:Arial,"PingFang SC",sans-serif;font-size:14px;line-height:1.25}.project-copy dt,.project-copy dd{margin:0}.project-copy a{text-underline-offset:3px}.project-gallery{display:grid;grid-template-columns:repeat(4,1fr);align-items:start;gap:0;padding:0 12px 90px}.project-gallery figure,.archive-grid figure{position:relative;margin:0;padding:0 6px 54px;min-width:0}.project-gallery img,.archive-grid img{display:block;width:100%;height:auto;object-fit:cover;filter:saturate(.92);transition:filter .25s,transform .25s}.project-gallery figure:hover img,.archive-grid figure:hover img{filter:saturate(1.08);transform:translateY(-2px)}figcaption{padding-top:5px;font-size:12px}.project-gallery figure:nth-child(6n+1){padding-left:0}.project-gallery figure:nth-child(6n+4){padding-right:0}.project-gallery figure:nth-child(6n+2){margin-top:0}.project-gallery figure:nth-child(6n+3){margin-top:0}.project-gallery figure:nth-child(6n+5){margin-top:40px}.project-gallery figure:nth-child(6n+6){margin-top:40px}.pattern-1 figure:nth-child(6n+1){margin-top:54px}.pattern-1 figure:nth-child(6n+3){margin-top:28px}.pattern-2 figure:nth-child(6n+2){margin-top:60px}.pattern-2 figure:nth-child(6n+4){margin-top:30px}.archive{position:relative;z-index:1;padding-top:64px}.archive-intro{position:relative;height:66vh;padding:16px 12px;overflow:hidden;display:flex;justify-content:flex-end;flex-direction:column}.archive-intro pre{position:absolute;left:35%;top:6%;color:#aaa;transform:scale(1.8);font-size:10px}.archive-intro h1{margin:0;font:clamp(5rem,14vw,15rem)/.75 Arial,sans-serif;letter-spacing:-.07em}.archive-intro p{position:absolute;right:12px;top:20%;font-size:12px}.archive-grid{display:grid;grid-template-columns:repeat(4,1fr);padding:0 12px 90px}.archive-grid figure:nth-child(3n+2){margin-top:90px}.archive-grid figure:nth-child(5n){grid-column:span 2}.about-screen{position:relative;z-index:1;min-height:100svh;padding:120px 12px 50px;display:grid;grid-template-columns:3fr 1fr;align-content:end;overflow:hidden}.about-screen pre{position:absolute;left:28%;top:18%;color:#aaa;transform:scale(2.3);font-size:11px}.about-screen>div{position:relative;z-index:2}.about-screen>div>p{font-size:13px}.about-screen h1{margin:0;font:clamp(4rem,9vw,10rem)/.85 Arial,sans-serif;letter-spacing:-.065em}.about-screen aside{align-self:end;display:flex;flex-direction:column;gap:12px;font:14px/1.25 Arial,sans-serif}.about-screen aside p{margin:0 0 20px}footer{display:grid;grid-template-columns:1fr 2fr auto;margin:0 12px;padding:12px 0 20px;border-top:1px solid;font-size:11px}footer button{justify-self:start;border:0;padding:0;background:none;cursor:pointer}
 @media(max-width:760px){.site-header{height:52px;grid-template-columns:1fr auto auto;gap:18px}.site-header>span{display:none}.site-header button{font-size:12px}.wordmark i{width:10px;height:10px}.hero{padding:52px 8px 12px}.hero h1{font-size:17vw}.ascii{inset:23vh 0 auto;transform:scale(1.5);font-size:8px}.scroll-cue{display:none}.section-label{padding-left:8px}.project-bar{height:auto;min-height:25px;padding:5px 8px;grid-template-columns:1fr auto}.project-bar strong{grid-column:1}.project-bar b{grid-column:2;grid-row:1}.project-bar span{display:none}.project-copy{grid-template-columns:1fr;gap:18px;padding:12px 8px 24px}.project-copy>p,.project-copy dl{grid-column:1}.project-gallery,.archive-grid{grid-template-columns:1fr 1fr;padding-left:8px;padding-right:8px}.project-gallery figure,.archive-grid figure{padding-left:0;padding-right:4px;padding-bottom:28px}.project-gallery figure:nth-child(even),.archive-grid figure:nth-child(even){padding-left:4px;padding-right:0}.project-gallery figure:nth-child(n),.archive-grid figure:nth-child(n){margin-top:0}.archive{padding-top:52px}.archive-intro{height:55vh}.archive-intro h1{font-size:20vw}.archive-intro p{top:14%}.archive-grid figure:nth-child(5n){grid-column:auto}.about-screen{padding:92px 8px 35px;grid-template-columns:1fr;gap:70px}.about-screen h1{font-size:18vw}.about-screen pre{left:0;transform:scale(1.4)}footer{margin:0 8px;grid-template-columns:1fr auto}footer span:first-of-type{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
@@ -59,6 +71,105 @@
   .archive-grid figure.is-expanded{
     padding-left:0!important;
     padding-right:0!important;
+  }
+}
+
+/* Project detail typography hierarchy. */
+.section-label{
+  font-size:12px;
+  font-weight:400;
+  line-height:1.3;
+}
+.project-bar{
+  height:auto;
+  min-height:32px;
+}
+.project-bar h2,
+.project-bar strong,
+.project-bar b{
+  font-size:18px;
+  font-weight:700;
+  line-height:1.3;
+}
+.project-copy{
+  padding-top:14px;
+}
+.project-copy>p{
+  width:100%;
+  max-width:45em;
+  font-size:14px;
+  font-weight:400;
+  line-height:1.65;
+}
+.project-copy dl,
+.project-meta{
+  font-size:14px;
+  font-weight:400;
+  line-height:1.6;
+}
+.project-meta p,
+.project-copy dt,
+.project-copy dd{
+  font-weight:400;
+}
+@media(max-width:760px){
+  .project-bar{
+    min-height:32px;
+    padding-top:6px;
+    padding-bottom:6px;
+  }
+  .project-bar h2,
+  .project-bar strong,
+  .project-bar b{
+    font-size:18px;
+    line-height:1.3;
+  }
+  .project-copy>p{
+    max-width:100%;
+  }
+}
+
+/* Project information uses Sarasa Mono SC while preserving the four-column system. */
+.project-list,
+.project-bar h2,
+.project-bar strong,
+.project-bar b,
+.project-copy>p,
+.project-copy dl,
+.project-meta,
+.section-label,
+figcaption{
+  font-family:"Sarasa Mono SC","Courier New","PingFang SC",monospace;
+}
+.project-copy>p{
+  width:min(100%,25em);
+  max-width:620px;
+  padding-right:0;
+  font-weight:400;
+  line-height:1.55;
+}
+.project-meta{
+  grid-column:3/5;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-content:start;
+  font-size:14px;
+  line-height:1.5;
+  font-weight:400;
+}
+.project-meta p{
+  margin:0;
+  padding-left:12px;
+  max-width:25em;
+}
+@media(max-width:760px){
+  .project-meta{
+    grid-column:1;
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .project-meta p{
+    padding-left:0;
   }
 }
 
@@ -206,4 +317,185 @@ body{
   z-index:-1;
   pointer-events:none;
   background:linear-gradient(90deg,transparent calc(25% - .5px),var(--line) 25%,transparent calc(25% + .5px),transparent calc(50% - .5px),var(--line) 50%,transparent calc(50% + .5px),transparent calc(75% - .5px),var(--line) 75%,transparent calc(75% + .5px));
+}
+
+/* Clear hero hierarchy: name first, discipline second, year and CTA as metadata. */
+.hero h1 span:first-child,
+.hero h1 span:nth-child(2),
+.hero h1 span:nth-child(3){
+  left:auto;
+  right:clamp(32px,3vw,48px);
+  text-align:right;
+  transform-origin:right center;
+}
+.hero h1 span:first-child{
+  top:39%;
+  font-size:100%;
+  transform:scaleX(1.08);
+}
+.hero h1 span:nth-child(2){
+  top:59%;
+  font-size:50%;
+  letter-spacing:-.055em;
+  transform:none;
+}
+.hero h1 span:nth-child(3){
+  top:69%;
+  font-size:25%;
+  letter-spacing:-.045em;
+  transform:none;
+}
+.hero-intro{
+  position:absolute;
+  z-index:3;
+  right:clamp(32px,3vw,48px);
+  bottom:32px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  gap:42px;
+  text-align:right;
+  font:11px/1.35 "Courier New","PingFang SC",monospace;
+  letter-spacing:.02em;
+}
+.hero-intro p{
+  margin:0;
+}
+.hero-intro a{
+  white-space:nowrap;
+  text-decoration:none;
+  border-bottom:1px solid currentColor;
+  padding-bottom:2px;
+}
+@media(max-width:760px){
+  .hero h1 span:first-child,
+  .hero h1 span:nth-child(2),
+  .hero h1 span:nth-child(3){
+    right:16px;
+  }
+  .hero h1 span:first-child{
+    top:41%;
+    font-size:92%;
+    transform:scaleX(1.04);
+  }
+  .hero h1 span:nth-child(2){
+    top:57%;
+    font-size:52%;
+  }
+  .hero h1 span:nth-child(3){
+    top:66%;
+    font-size:30%;
+  }
+  .hero-intro{
+    right:16px;
+    bottom:20px;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:12px;
+    font-size:10px;
+  }
+}
+
+/* Final project-detail type scale overrides. */
+.section-label{font-size:12px;font-weight:400;line-height:1.3}
+.project-bar{height:auto;min-height:32px}
+.project-bar h2,.project-bar strong,.project-bar b{font-size:18px;font-weight:700;line-height:1.3}
+.project-copy{padding-top:14px}
+.project-copy>p{width:100%;max-width:45em;padding-right:0;font-size:14px;font-weight:400;line-height:1.65}
+.project-copy dl,.project-meta{font-size:14px;font-weight:400;line-height:1.6}
+.project-meta p,.project-copy dt,.project-copy dd{font-weight:400}
+@media(max-width:760px){
+  .project-bar{min-height:32px;padding-top:6px;padding-bottom:6px}
+  .project-bar h2,.project-bar strong,.project-bar b{font-size:18px;line-height:1.3}
+  .project-copy>p{max-width:100%}
+}
+
+/* Compact project headings and match the work label to their typeface. */
+.section-label{
+  font-family:"Sarasa Mono SC","Courier New","PingFang SC",monospace;
+  font-size:16px;
+  font-weight:400;
+}
+.project-bar h2,
+.project-bar strong,
+.project-bar b{
+  font-size:16px;
+}
+@media(max-width:760px){
+  .project-bar h2,
+  .project-bar strong,
+  .project-bar b{
+    font-size:16px;
+  }
+}
+
+/* Use the Bridge project typography consistently across every project. */
+.project,
+.project-bar h2,
+.project-bar strong,
+.project-bar b,
+.project-copy>p,
+.project-copy dl,
+.project-copy dt,
+.project-copy dd,
+.project-copy a,
+.project-meta,
+.project-meta p{
+  font-family:"Sarasa Mono SC","Courier New","PingFang SC",monospace;
+}
+.project-bar h2,
+.project-bar strong,
+.project-bar b{
+  font-size:16px;
+  font-weight:700;
+  line-height:1.3;
+}
+.project-copy>p,
+.project-copy dl,
+.project-copy dt,
+.project-copy dd,
+.project-copy a,
+.project-meta,
+.project-meta p{
+  font-size:14px;
+  font-weight:400;
+  line-height:1.6;
+}
+.project-copy>p{
+  line-height:1.65;
+}
+
+/* Videos behave like still images inside the existing responsive gallery. */
+.project-gallery video,
+.archive-grid video{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:cover;
+  filter:saturate(.92);
+}
+
+/* Project 03 opens with a persistent two-column feature video. */
+.project-gallery figure.project-media-featured{
+  grid-column:span 2;
+}
+.project-gallery figure.project-media-raised{
+  margin-top:-48px!important;
+}
+
+.project-gallery.project-04 img,
+.project-gallery.project-04 video{
+  aspect-ratio:16/9;
+  object-fit:cover;
+  object-position:center;
+}
+@media(max-width:760px){
+  .project-gallery figure.project-media-featured{
+    grid-column:1 / -1;
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+  .project-gallery figure.project-media-raised{
+    margin-top:-24px!important;
+  }
 }
