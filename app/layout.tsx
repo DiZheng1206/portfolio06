@@ -3,7 +3,7 @@ import { Bodoni_Moda } from "next/font/google";
 import "./globals.css";
 const displayFont=Bodoni_Moda({subsets:["latin"],variable:"--font-display"});
 export const metadata: Metadata = {
-  metadataBase: new URL("https://di-creative-portfolio.deane1206.chatgpt.site"),
+  metadataBase: new URL("https://di-portfolio06.netlify.app"),
   title:"DI ZHENG — Portfolio 2026",
   description:"DI Zheng design portfolio 2026.",
   openGraph:{title:"DI ZHENG — Portfolio 2026",description:"DI Zheng design portfolio 2026.",type:"website",images:["/og.png"]},
