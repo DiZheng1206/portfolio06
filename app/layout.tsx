@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Bodoni_Moda } from "next/font/google";
 import "./globals.css";
 const displayFont=Bodoni_Moda({subsets:["latin"],variable:"--font-display"});
+const siteUrl=process.env.NEXT_PUBLIC_SITE_URL??"https://di-portfolio06.netlify.app";
 export const metadata: Metadata = {
-  metadataBase: new URL("https://di-portfolio06.netlify.app"),
+  metadataBase: new URL(siteUrl),
   title:"DI ZHENG — Portfolio 2026",
   description:"DI Zheng design portfolio 2026.",
   openGraph:{title:"DI ZHENG — Portfolio 2026",description:"DI Zheng design portfolio 2026.",type:"website",images:["/og.png"]},

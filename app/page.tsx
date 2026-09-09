@@ -4,13 +4,15 @@ import { flushSync } from "react-dom";
 import { profile, projects } from "./content";
 
 const ascii = `                .-=====-.\n             .-'  .---.  '-.\n           .'    /  _  \\    '.\n          /     |  (_)  |     \\\n         |       \\     /       |\n          \\       '---'       /\n           '._    .---.    _.'\n              '--/     \\--'\n          ____.-'       '-.____\n       .-'   /             \\   '-.\n      /_____/               \\_____\\`;
+const basePath=process.env.NEXT_PUBLIC_BASE_PATH??"";
+const assetUrl=(src:string)=>`${basePath}${src}`;
 
 function AsciiLogo(){
   const artRef=useRef<HTMLPreElement>(null);
   useEffect(()=>{
     const image=new Image();
     let frame=0;
-    image.src="/logo-source.png";
+    image.src=assetUrl("/logo-source.png");
     image.onload=()=>{
       const cols=108,rows=108;
       const canvas=document.createElement("canvas");
@@ -87,7 +89,7 @@ export default function Home(){
 
     {view==="projects"&&<>
       <section className="hero">
-        <h1><span>DI ZHENG</span><span>VISUAL DESIGNER</span><span className="hero-year"><img className="hero-silver-logo" src="/silver-logo-transparent.png" alt="DI Zheng silver logo"/><em>2026</em></span></h1>
+        <h1><span>DI ZHENG</span><span>VISUAL DESIGNER</span><span className="hero-year"><img className="hero-silver-logo" src={assetUrl("/silver-logo-transparent.png")} alt="DI Zheng silver logo"/><em>2026</em></span></h1>
         <div className="hero-intro"><p>BRAND IDENTITY, INTERACTIVE EXPERIENCES,<br/>DIGITAL DESIGN &amp; VIBE CODING.</p><a href="#projects">VIEW SELECTED WORK ↓</a></div>
       </section>
       <section id="projects" className="project-list"><p className="section-label">work</p>
@@ -95,13 +97,13 @@ export default function Home(){
           <div className="project-bar"><h2>{project.title}</h2><strong>{project.services}</strong><b>{project.year}</b><span>×</span></div>
           <div className="project-copy"><p>{project.description}</p><div className="project-meta"><p>{project.deliverables}</p><p>{project.client}</p></div></div>
           <div className={`project-gallery project-${project.id} pattern-${pIndex%3}`}>
-            {project.images.map((src,i)=>{const imageKey=`project-${project.id}-${i}`;const expanded=expandedImages.has(imageKey);const isVideo=src.endsWith(".mp4");const featured=(project.id==="03"&&i===0)||((project.id==="04"||project.id==="06")&&isVideo);const raised=project.id==="03"&&i===7;const customCaption=project.id==="03"&&i>=1&&i<=3?["ANGRY","FEAR","TIRED"][i-1]:null;const extension=src.split(".").pop()||"jpg";return <figure key={`${src}-${i}`} className={[expanded?"is-expanded":"",featured?"project-media-featured":"",raised?"project-media-raised":""].filter(Boolean).join(" ")} role="button" tabIndex={0} aria-pressed={expanded} onClick={()=>toggleImage(imageKey)} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleImage(imageKey)}}}>{isVideo?<video src={src} aria-label={`${project.title} project ${i+1}`} autoPlay muted loop playsInline preload="metadata"/>:<img src={src} alt={`${project.title} project ${i+1}`} loading="lazy"/>}<figcaption>{customCaption??`${project.id.toLowerCase()}_${String(i+1).padStart(3,"0")}.${extension}`}</figcaption></figure>})}
+            {project.images.map((src,i)=>{const imageKey=`project-${project.id}-${i}`;const expanded=expandedImages.has(imageKey);const isVideo=src.endsWith(".mp4");const featured=(project.id==="03"&&i===0)||((project.id==="04"||project.id==="06")&&isVideo);const raised=project.id==="03"&&i===7;const customCaption=project.id==="03"&&i>=1&&i<=3?["ANGRY","FEAR","TIRED"][i-1]:null;const extension=src.split(".").pop()||"jpg";const mediaSrc=assetUrl(src);return <figure key={`${src}-${i}`} className={[expanded?"is-expanded":"",featured?"project-media-featured":"",raised?"project-media-raised":""].filter(Boolean).join(" ")} role="button" tabIndex={0} aria-pressed={expanded} onClick={()=>toggleImage(imageKey)} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleImage(imageKey)}}}>{isVideo?<video src={mediaSrc} aria-label={`${project.title} project ${i+1}`} autoPlay muted loop playsInline preload="metadata"/>:<img src={mediaSrc} alt={`${project.title} project ${i+1}`} loading="lazy"/>}<figcaption>{customCaption??`${project.id.toLowerCase()}_${String(i+1).padStart(3,"0")}.${extension}`}</figcaption></figure>})}
           </div>
         </article>)}
       </section>
     </>}
 
-    {view==="photos"&&<section className="archive"><div className="archive-intro"><h1>work archive</h1><p>selected projects,<br/>details and experiments.</p></div><div className="archive-grid">{projects.flatMap(p=>[...p.images,...p.images]).map((src,i)=>{const imageKey=`archive-${i}`;const expanded=expandedImages.has(imageKey);const isVideo=src.endsWith(".mp4");const extension=src.split(".").pop()||"jpg";return <figure key={`${src}-${i}`} className={expanded?"is-expanded":""} role="button" tabIndex={0} aria-pressed={expanded} onClick={()=>toggleImage(imageKey)} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleImage(imageKey)}}}>{isVideo?<video src={src} aria-label={`archive ${i+1}`} autoPlay muted loop playsInline preload="metadata"/>:<img src={src} alt={`archive ${i+1}`} loading="lazy"/>}<figcaption>work_{String(i+1).padStart(3,"0")}.{extension}</figcaption></figure>})}</div></section>}
+    {view==="photos"&&<section className="archive"><div className="archive-intro"><h1>work archive</h1><p>selected projects,<br/>details and experiments.</p></div><div className="archive-grid">{projects.flatMap(p=>[...p.images,...p.images]).map((src,i)=>{const imageKey=`archive-${i}`;const expanded=expandedImages.has(imageKey);const isVideo=src.endsWith(".mp4");const extension=src.split(".").pop()||"jpg";const mediaSrc=assetUrl(src);return <figure key={`${src}-${i}`} className={expanded?"is-expanded":""} role="button" tabIndex={0} aria-pressed={expanded} onClick={()=>toggleImage(imageKey)} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleImage(imageKey)}}}>{isVideo?<video src={mediaSrc} aria-label={`archive ${i+1}`} autoPlay muted loop playsInline preload="metadata"/>:<img src={mediaSrc} alt={`archive ${i+1}`} loading="lazy"/>}<figcaption>work_{String(i+1).padStart(3,"0")}.{extension}</figcaption></figure>})}</div></section>}
 
     {view==="about"&&<section className="about-screen"><div><p>about</p><h1>i build identities,<br/>images and digital<br/>experiences.</h1></div><aside><p>这是你的个人介绍区域。可以在 content.ts 中修改姓名、项目、联系方式与全部图片。</p><a href={`mailto:${profile.email}`}>{profile.email}</a><a href={profile.instagram}>instagram ↗</a></aside></section>}
     <footer><button onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}>↑ top</button><span>design & development by {profile.name}</span><span>©{new Date().getFullYear()}</span></footer>
